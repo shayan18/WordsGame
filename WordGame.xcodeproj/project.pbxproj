@@ -17,6 +17,7 @@
 		E4127C242885CF7D00D1AED5 /* FileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4127C212885CF7D00D1AED5 /* FileReader.swift */; };
 		E4127C272885CF9E00D1AED5 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4127C262885CF9E00D1AED5 /* Word.swift */; };
 		E4127C2A2885D12E00D1AED5 /* LoggerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4127C292885D12E00D1AED5 /* LoggerExt.swift */; };
+		E421DA302885DC4F0062B6D3 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E421DA2F2885DC4F0062B6D3 /* GameData.swift */; };
 		E4B560602885BF5800D020A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B5605F2885BF5800D020A3 /* AppDelegate.swift */; };
 		E4B560622885BF5800D020A3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B560612885BF5800D020A3 /* SceneDelegate.swift */; };
 		E4B560642885BF5800D020A3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B560632885BF5800D020A3 /* HomeViewController.swift */; };
@@ -55,6 +56,7 @@
 		E4127C222885CF7D00D1AED5 /* FileName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileName.swift; sourceTree = "<group>"; };
 		E4127C262885CF9E00D1AED5 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E4127C292885D12E00D1AED5 /* LoggerExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerExt.swift; sourceTree = "<group>"; };
+		E421DA2F2885DC4F0062B6D3 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		E4B5605C2885BF5800D020A3 /* WordGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B5605F2885BF5800D020A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4B560612885BF5800D020A3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				E4127C262885CF9E00D1AED5 /* Word.swift */,
+				E421DA2F2885DC4F0062B6D3 /* GameData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4127C0D2885C53800D1AED5 /* GameViewController.swift in Sources */,
+				E421DA302885DC4F0062B6D3 /* GameData.swift in Sources */,
 				E4127C1E2885CF7800D1AED5 /* FileType.swift in Sources */,
 				E4B560642885BF5800D020A3 /* HomeViewController.swift in Sources */,
 				E4127C1A2885CADB00D1AED5 /* GameRepository.swift in Sources */,

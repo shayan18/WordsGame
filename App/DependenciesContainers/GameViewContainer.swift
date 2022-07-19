@@ -32,7 +32,16 @@ extension GameViewContainer: HomeFlowCoordinatorDependencies {
   }
 
   func makeGameScreenViewController() -> GameViewController {
-    return GameViewController()
+    let storyboard = UIStoryboard(name: Storyboard.main.rawValue, bundle: .main)
+    let gameViewController: GameViewController = GameViewController.instantiateViewController(with: storyboard)
+    let repository = WordsRepository(resourceName: FileName.words.rawValue, bundle: .main)
+    let useCase = GameUseCase(wordsRepository: repository)
+    let navigator = GameViewNavigator(viewController: gameViewController)
+    let actions = GameScreenActions(dismiss: navigator.dismiss)
+    let viewModel = GameScreenViewModel(useCase: useCase, actions: actions)
+    gameViewController.viewModel = viewModel
+    gameViewController.modalPresentationStyle = .fullScreen
+    return gameViewController
   }
 
 }

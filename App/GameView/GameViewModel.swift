@@ -7,17 +7,15 @@
 
 import Foundation
 import Combine
-struct GameScreenActions {
-  let dismiss: (String) -> ()
-}
 
 protocol GameScreenViewModelOutput {
   var answer: PassthroughSubject<String, Never> { get }
   var word: PassthroughSubject<String, Never> { get }
   var translation: PassthroughSubject<String, Never> { get }
+  var score: PassthroughSubject<String, Never> { get }
+  var lives: PassthroughSubject<Int, Never> { get }
   var isButtonInteractionsEnabled: PassthroughSubject<Bool, Never> { get }
   var positionTranslation: (() -> ())? { get set }
-  var wordTitle: String { get }
   var showTranslation: (() -> ())? { get set }
   var hideTranslation: (() -> ())? { get set }
 }
@@ -39,8 +37,9 @@ final class GameScreenViewModel: GameScreenViewModelProtocol {
   var AnyCancellables = Set<AnyCancellable>()
 
   var word = PassthroughSubject<String, Never>()
-
+  var score = PassthroughSubject<String, Never>()
   var translation = PassthroughSubject<String, Never>()
+  var lives = PassthroughSubject<Int, Never>()
 
   var isButtonInteractionsEnabled = PassthroughSubject<Bool, Never>()
 
@@ -49,7 +48,6 @@ final class GameScreenViewModel: GameScreenViewModelProtocol {
   var answer = PassthroughSubject<String, Never>()
 
   var animateTranslaions: Bool = false
-  var wordTitle: String { "Word" }
 
   var showTranslation: (() -> ())?
   var hideTranslation: (() -> ())?
@@ -69,7 +67,7 @@ final class GameScreenViewModel: GameScreenViewModelProtocol {
     self.actions = actions
     self.gameData = useCase.setupGame
     self.useCase.updateGameData = { [weak self] (gameData) in self?.updateGameData(gameData: gameData) }
-    self.useCase.endGame = { [weak self] in self?.actions.dismiss(self?.useCase.getScore() ?? "0") }
+    self.useCase.endGame = { [weak self] in self?.actions.dismiss() }
   }
 
   func viewDidLoad() {
@@ -124,8 +122,7 @@ final class GameScreenViewModel: GameScreenViewModelProtocol {
   }
 
   func didTapOnCloseButton() {
-    let totalScore = useCase.getScore()
-    actions.dismiss(totalScore)
+    actions.dismiss()
   }
 
   private func updateGameData(gameData: Round) {
@@ -151,13 +148,24 @@ final class GameScreenViewModel: GameScreenViewModelProtocol {
     timerVal = 0
   }
 
+  private func checkLives() {
+    if self.useCase.lives == 0 {
+      self.translation.send(completion: .finished)
+      self.lives.send(completion: .finished)
+    }
+  }
+
   private func checkPlayerChoice(playerAction: PlayerAction) {
     useCase.checkAction(action: playerAction) { [weak self] (result) in
+      guard let self = self else { return }
       switch playerAction {
       case .none:
-        self?.answer.send("No Answer")
+        self.checkLives()
+        self.answer.send("No Answer")
       default:
-        self?.answer.send(result ? "Right Answer" : "Wrong Answer")
+        self.checkLives()
+        self.score.send("Score: \(self.useCase.score)")
+        self.answer.send(result ? "Right Answer" : "Wrong Answer")
       }
     }
   }

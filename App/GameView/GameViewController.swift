@@ -7,16 +7,15 @@
 
 import UIKit
 import Combine
+import Logging
 
 final class GameViewController: UIViewController {
   // MARK: Outlets
-
-  @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var wordLabel: UILabel!
+  @IBOutlet private weak var scoreLabel: UILabel!
   @IBOutlet private weak var resultLabel: UILabel!
   @IBOutlet private weak var correctButton: UIButton!
   @IBOutlet private weak var wrongButton: UIButton!
-
   private var translationLabel: UILabel!
 
   var viewModel: GameScreenViewModelProtocol!
@@ -29,10 +28,15 @@ final class GameViewController: UIViewController {
     viewModel.viewDidLoad()
   }
 
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    viewModel.viewDidAppear()
+  }
+
   private func setupTranslationLabel() {
-    translationLabel = UILabel(frame: CGRect(x: 150, y: -30, width: 200, height: 100))
-    // translationLabel.font = .translationWordFont
-    translationLabel.textColor = .white
+    translationLabel = UILabel(frame: CGRect(x: 100, y: -50, width: 200, height: 100))
+   // translationLabel.font = .translationWordFont
+    translationLabel.textColor = .red
     translationLabel.isHidden = true
     translationLabel.textAlignment = .center
     view.addSubview(translationLabel)
@@ -51,10 +55,35 @@ final class GameViewController: UIViewController {
       self?.setButtonInteraction(enabled: status)
     }.store(in: &viewModel.AnyCancellables)
 
-    viewModel.translation.sink { [weak self] translation in
-      self?.translationLabel.text = translation
+    viewModel.translation.sink { [weak self] completion in
+      switch completion {
+      case .finished:
+        self?.translationLabel.removeFromSuperview()
+      }
+    } receiveValue: { translation in
+      self.translationLabel.text = translation
+    }
+    .store(in: &viewModel.AnyCancellables)
+
+    viewModel.score.sink { [weak self] score in
+      self?.scoreLabel.text = score
     }.store(in: &viewModel.AnyCancellables)
-    titleLabel.text = viewModel.wordTitle
+
+    viewModel.lives.sink { completion in
+      switch completion {
+      case .finished:
+        self.showAlert(
+          with: "Game Over",
+          and: self.scoreLabel.text,
+          actionTitle: "Exit",
+          handler: { _ in
+          self.viewModel.didTapOnCloseButton()
+        })
+      }
+    } receiveValue: { lives in
+      Logger.shared.log(level: .info, "\(lives)")
+    }
+    .store(in: &viewModel.AnyCancellables)
   }
 
   private func setActions() {
@@ -71,7 +100,7 @@ final class GameViewController: UIViewController {
 
   private func animateTranslationLabel() {
     translationLabel.isHidden = false
-    UIView.animate(withDuration: 6, delay: 1, options: []
+    UIView.animate(withDuration: 6, delay: 0.5, options: []
                    , animations: { self.translationLabel.frame.origin.y = UIScreen.main.bounds.height},
                    completion: { (isCompleted) in if isCompleted { self.viewModel.didTranslationOutOfScreen() } }
     )

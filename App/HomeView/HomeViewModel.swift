@@ -14,7 +14,7 @@ protocol HomeViewModelProtocol {
 
   // OutPuts
   var title: String { get }
-  var buttonTitle:String { get }
+  var buttonTitle: String { get }
 }
 
 
@@ -27,7 +27,6 @@ final class HomeViewModel: HomeViewModelProtocol {
 
   var title: String { "Word Game" }
   var buttonTitle: String { "Play" }
-  //  var score: Observable<String> = Observable("")
 
   func playPressed() {
     actions.showGameView()

@@ -12,16 +12,18 @@ protocol GamePlayable {
   var endGame: (()->())? { get set }
   var setupGame: Round { get }
   func checkAction(action: PlayerAction, result: @escaping (Bool) -> Void)
-  func getScore() -> String
+  var score: Int { get }
+  var lives: Int { get }
 }
 
 final class GameUseCase: GamePlayable {
   let wordsRepository: WordsProvidable
   var updateGameData: ((Round) -> ())?
   var endGame: (() -> ())?
-  var setupGame: Round { gameService.rounds.first ?? Round(word: "Something went wrong, please check your internet connection", options: []) }
+  var setupGame: Round { gameService.rounds.first ?? Round(word: "Something went wrong", options: []) }
 
-  private var score = 0
+  var score: Int = 0
+  var lives: Int = 3
   private var counter = 0
   private var inProcessGameDataIndex = 0
   private let gameService: GameService
@@ -41,9 +43,6 @@ final class GameUseCase: GamePlayable {
     }
     checkPlayerAction(userChoice: action, result: result)
   }
-
-
-  func getScore() -> String { "\(score)" }
 
   private func checkPlayerAction(userChoice: PlayerAction, result: @escaping (Bool) -> Void) {
     switch userChoice {
@@ -70,7 +69,10 @@ final class GameUseCase: GamePlayable {
       else { updateData() }
       result(true)
     }
-    else { result(false) }
+    else {
+      lives -= 1
+      result(false)
+    }
   }
 
   private func handleWrongAnswerCase(answer: String, result: @escaping (Bool) -> Void) {
@@ -80,6 +82,7 @@ final class GameUseCase: GamePlayable {
     } else {
       if inProcessGameDataIndex == (gameService.rounds.count - 1) { endGame?() }
       else { updateData() }
+      lives -= 1
       result(false)
     }
   }
@@ -87,6 +90,7 @@ final class GameUseCase: GamePlayable {
   private func handleNoAnswerCase(translation: String, result: @escaping (Bool) -> Void) {
     if inProcessGameDataIndex == (gameService.rounds.count - 1) { endGame?() }
     else { if gameService.rounds[inProcessGameDataIndex].options.last! == translation { updateData() } }
+    lives -= 1
     result(false)
   }
 }

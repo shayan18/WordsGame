@@ -48,7 +48,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="playPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zan-F2-VZX"/>
-                                    <segue destination="0eL-y1-RNR" kind="show" id="AcG-4L-1CT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -77,11 +76,11 @@
             <objects>
                 <viewController storyboardIdentifier="GameViewController" id="0eL-y1-RNR" customClass="GameViewController" customModule="WordGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gBR-iT-hHu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="B9j-Jm-z1E">
-                                <rect key="frame" x="41.5" y="305.5" width="331" height="98"/>
+                                <rect key="frame" x="41.5" y="313.5" width="331" height="98"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rU-2S-jA0">
                                         <rect key="frame" x="121" y="0.0" width="89.5" height="39"/>
@@ -98,7 +97,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6Kx-Qs-v5l">
-                                <rect key="frame" x="62" y="423.5" width="290" height="50"/>
+                                <rect key="frame" x="62" y="431.5" width="290" height="50"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXG-Qo-gQl">
                                         <rect key="frame" x="0.0" y="0.0" width="139" height="50"/>
@@ -116,6 +115,9 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didPressedCorrectButton:" destination="0eL-y1-RNR" eventType="touchUpInside" id="5FJ-qF-OxJ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woR-jL-wmf">
                                         <rect key="frame" x="151" y="0.0" width="139" height="50"/>
@@ -133,6 +135,9 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didPressedWrongButton:" destination="0eL-y1-RNR" eventType="touchUpInside" id="uOq-sM-yMB"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -155,7 +160,16 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didPressedCloseButton:" destination="0eL-y1-RNR" eventType="touchUpInside" id="Yb3-GH-hXF"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tGw-Ox-znm">
+                                <rect key="frame" x="162.5" y="521.5" width="89.5" height="39"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="30"/>
+                                <color key="textColor" systemColor="systemOrangeColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bjl-If-bko"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -167,13 +181,22 @@
                             <constraint firstItem="6Kx-Qs-v5l" firstAttribute="top" secondItem="B9j-Jm-z1E" secondAttribute="bottom" constant="20" id="JsC-4C-g7N"/>
                             <constraint firstItem="0NP-I2-Cco" firstAttribute="top" secondItem="bjl-If-bko" secondAttribute="top" constant="20" id="P5d-eR-Nhc"/>
                             <constraint firstItem="B9j-Jm-z1E" firstAttribute="centerX" secondItem="bjl-If-bko" secondAttribute="centerX" id="T75-UC-9iz"/>
+                            <constraint firstItem="tGw-Ox-znm" firstAttribute="centerX" secondItem="bjl-If-bko" secondAttribute="centerX" id="hx7-2O-qXc"/>
                             <constraint firstItem="B9j-Jm-z1E" firstAttribute="centerY" secondItem="bjl-If-bko" secondAttribute="centerY" multiplier="0.8" id="p0O-oc-Bba"/>
                             <constraint firstItem="6Kx-Qs-v5l" firstAttribute="centerX" secondItem="B9j-Jm-z1E" secondAttribute="centerX" id="pz5-p0-Ndd"/>
+                            <constraint firstItem="tGw-Ox-znm" firstAttribute="top" secondItem="6Kx-Qs-v5l" secondAttribute="bottom" constant="40" id="sKL-p4-ubI"/>
                             <constraint firstItem="bru-5F-VND" firstAttribute="centerY" secondItem="0NP-I2-Cco" secondAttribute="centerY" id="v0p-q4-32b"/>
                             <constraint firstItem="6Kx-Qs-v5l" firstAttribute="width" secondItem="gBR-iT-hHu" secondAttribute="width" multiplier="0.7" id="zdY-KF-c5i"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1Qe-Y7-bp0"/>
+                    <connections>
+                        <outlet property="correctButton" destination="mXG-Qo-gQl" id="5GI-71-UeN"/>
+                        <outlet property="resultLabel" destination="tGw-Ox-znm" id="wti-Xs-Umf"/>
+                        <outlet property="titleLabel" destination="1rU-2S-jA0" id="4UF-8o-23Q"/>
+                        <outlet property="wordLabel" destination="PyW-nd-EdY" id="mZU-Ht-XP0"/>
+                        <outlet property="wrongButton" destination="woR-jL-wmf" id="hu4-68-5Fz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a2z-co-3pX" sceneMemberID="firstResponder"/>
             </objects>

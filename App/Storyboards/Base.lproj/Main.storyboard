@@ -47,6 +47,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="playPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zan-F2-VZX"/>
                                     <segue destination="0eL-y1-RNR" kind="show" id="AcG-4L-1CT"/>
                                 </connections>
                             </button>
@@ -62,6 +63,10 @@
                             <constraint firstItem="omo-jq-27M" firstAttribute="top" secondItem="qrG-ow-7AT" secondAttribute="bottom" constant="20" id="iZv-3N-inI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="playButton" destination="f64-zN-hh2" id="7v4-ME-HVg"/>
+                        <outlet property="titleLabel" destination="omo-jq-27M" id="H3P-6A-iuj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

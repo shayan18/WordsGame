@@ -8,7 +8,6 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
   // MARK: Outlets
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var playButton: UIButton!
@@ -18,16 +17,15 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()
-    viewModel.onAppear()
   }
 
   private func setupView() {
-      titleLabel.text = viewModel.title
-      playButton.setTitle(viewModel.buttonTitle, for: .normal)
+    titleLabel.text = viewModel.title
+    playButton.setTitle(viewModel.buttonTitle, for: .normal)
   }
 
-  @IBAction func playPressed(_ sender: UIButton) {
-      viewModel.playPressed()
+  @IBAction private func playPressed(_ sender: UIButton) {
+    viewModel.playPressed()
   }
 }
 

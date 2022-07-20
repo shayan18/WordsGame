@@ -10,13 +10,11 @@ import Foundation
 protocol HomeViewModelProtocol {
   // Inputs
   func playPressed()
-  func onAppear()
 
   // OutPuts
   var title: String { get }
   var buttonTitle: String { get }
 }
-
 
 final class HomeViewModel: HomeViewModelProtocol {
   private let actions: HomeViewModelActions
@@ -30,9 +28,6 @@ final class HomeViewModel: HomeViewModelProtocol {
 
   func playPressed() {
     actions.showGameView()
-  }
-
-  func onAppear() {
   }
 }
 

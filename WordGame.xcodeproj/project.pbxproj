@@ -180,18 +180,18 @@
 		E421DA2D2885DB5C0062B6D3 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				E421DA2E2885DB6E0062B6D3 /* Game */,
+				E421DA2E2885DB6E0062B6D3 /* GamePlay */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		E421DA2E2885DB6E0062B6D3 /* Game */ = {
+		E421DA2E2885DB6E0062B6D3 /* GamePlay */ = {
 			isa = PBXGroup;
 			children = (
 				E4C597522886BADA00F57EC9 /* UseCase */,
 				E4127C282885CFB600D1AED5 /* Entities */,
 			);
-			path = Game;
+			path = GamePlay;
 			sourceTree = "<group>";
 		};
 		E49EC7992887F2CD00D8929C /* Resources */ = {

@@ -94,21 +94,6 @@ final class GameViewModel: GameViewModelProtocol {
     startTimer()
   }
 
-  private func updateGameRound(round: Round) {
-    self.round = round
-    optionsIndexCounter = 0
-    word.send(round.word)
-    translation.send(round.options[0])
-    translationPosition?()
-  }
-
-  private func checkLives() {
-    if self.useCase.lives == 0 {
-      self.translation.send(completion: .finished)
-      self.lives.send(completion: .finished)
-    }
-  }
-
   private func checkPlayerAction(action: PlayerAction) {
     useCase.checkAction(action: action) { [weak self] (result) in
       guard let self = self else { return }
@@ -122,6 +107,21 @@ final class GameViewModel: GameViewModelProtocol {
         self.score.send("Score: \(self.useCase.score)")
         self.answer.send(result ? "Right Answer" : "Wrong Answer")
       }
+    }
+  }
+
+  private func updateGameRound(round: Round) {
+    self.round = round
+    optionsIndexCounter = 0
+    word.send(round.word)
+    translation.send(round.options[0])
+    translationPosition?()
+  }
+
+  private func checkLives() {
+    if self.useCase.lives == 0 {
+      self.translation.send(completion: .finished)
+      self.lives.send(completion: .finished)
     }
   }
 }

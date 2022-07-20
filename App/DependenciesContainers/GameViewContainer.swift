@@ -21,7 +21,8 @@ final class GameViewContainer {
     self.dependencies = dependencies
   }
 
-  func makeHomeFlowCoordinator(window: UIWindow) -> HomeNavigator { HomeNavigator(window: window, dependencies: self) }
+  func makeHomeFlowCoordinator(window: UIWindow) -> HomeNavigator { HomeNavigator(window: window, dependencies: self)
+  }
 }
 
 extension GameViewContainer: HomeFlowCoordinatorDependencies {
@@ -37,18 +38,10 @@ extension GameViewContainer: HomeFlowCoordinatorDependencies {
     let repository = WordsRepository(resourceName: FileName.words.rawValue, bundle: .main)
     let useCase = GameUseCase(wordsRepository: repository)
     let navigator = GameViewNavigator(viewController: gameViewController)
-    let actions = GameScreenActions(dismiss: navigator.dismiss)
-    let viewModel = GameScreenViewModel(useCase: useCase, actions: actions)
+    let actions = GameViewModelActions(dismiss: navigator.dismiss)
+    let viewModel = GameViewModel(useCase: useCase, actions: actions)
     gameViewController.viewModel = viewModel
     gameViewController.modalPresentationStyle = .fullScreen
     return gameViewController
-  }
-
-}
-
-extension UIViewController {
-  static func instantiateViewController<T: UIViewController>(with storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)) -> T {
-    let viewController: T = storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
-    return viewController
   }
 }

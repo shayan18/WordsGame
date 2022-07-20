@@ -17,5 +17,10 @@ extension UIViewController {
     alertController.addAction(action)
     present(alertController, animated: true, completion: nil)
   }
+
+  static func instantiateViewController<T: UIViewController>(with storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: .main)) -> T {
+    let viewController: T = storyboard.instantiateViewController(withIdentifier: String(describing: T.self)) as! T
+    return viewController
+  }
 }
 

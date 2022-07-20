@@ -72,7 +72,7 @@ class GameUseCaseTests: XCTestCase {
     let expectation = self.expectation(description: testDesc)
     let viewModel = MockViewModel(useCase: useCase)
     let oldRound = viewModel.round
-    useCase.checkAction(action: .wrong(answer: "timbre")) { _ in
+    useCase.checkAction(action: .wrong(answer: "quieto")) { _ in
       XCTAssertEqual(viewModel.round.word, "group")
       XCTAssertNotEqual(viewModel.round.word, oldRound.word)
       expectation.fulfill()

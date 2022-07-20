@@ -159,13 +159,13 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		E4127C282885CFB600D1AED5 /* Models */ = {
+		E4127C282885CFB600D1AED5 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				E4127C262885CF9E00D1AED5 /* Word.swift */,
 				E421DA2F2885DC4F0062B6D3 /* Round.swift */,
 			);
-			path = Models;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		E4127C2B2885D13100D1AED5 /* Extensions */ = {
@@ -189,7 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				E4C597522886BADA00F57EC9 /* UseCase */,
-				E4127C282885CFB600D1AED5 /* Models */,
+				E4127C282885CFB600D1AED5 /* Entities */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -219,6 +219,26 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		E49EC7A2288838E500D8929C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E4127C102885C7E500D1AED5 /* Storyboards */,
+				E4C597542886BC2E00F57EC9 /* HomeView */,
+				E4127C0E2885C7AE00D1AED5 /* GameView */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E49EC7A32888396900D8929C /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				E49EC7A2288838E500D8929C /* Presentation */,
+				E421DA2D2885DB5C0062B6D3 /* Domain */,
+				E4127C252885CF8700D1AED5 /* Data */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
 		E4B560532885BF5800D020A3 = {
 			isa = PBXGroup;
 			children = (
@@ -242,16 +262,12 @@
 			isa = PBXGroup;
 			children = (
 				E4C59778288764EC00F57EC9 /* AppStart */,
+				E49EC7A32888396900D8929C /* GameScene */,
 				E4C597632886CD2E00F57EC9 /* DependenciesContainers */,
-				E4C597542886BC2E00F57EC9 /* HomeView */,
-				E4127C252885CF8700D1AED5 /* Data */,
-				E421DA2D2885DB5C0062B6D3 /* Domain */,
-				E4127C0E2885C7AE00D1AED5 /* GameView */,
 				E4127C2B2885D13100D1AED5 /* Extensions */,
 				E4C597642886CD9D00F57EC9 /* Helpers */,
 				E4B5606D2885BF5900D020A3 /* Info.plist */,
 				E4127C112885C7FF00D1AED5 /* Resources */,
-				E4127C102885C7E500D1AED5 /* Storyboards */,
 			);
 			path = App;
 			sourceTree = "<group>";

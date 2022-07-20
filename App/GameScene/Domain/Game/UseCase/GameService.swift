@@ -21,15 +21,15 @@ final class GameService {
   }
 
   private func generateRandomWordsForGame(originalWords: [String], translations: [String]) -> [Round] {
-    var result = [Round]()
+    var rounds = [Round]()
     let totalWords = originalWords.count
-    let maxNum = min(4, totalWords)
+    let MaxOptions = min(AppConstant.probabilityFactor, totalWords)
 
     originalWords.forEach { word in
       var option = Set<String>()
       option.insert(wordsDict[word]!)
       var counter = 1
-      while counter != maxNum {
+      while counter != MaxOptions {
         let translation = translations.randomElement() ?? ""
         if translation != wordsDict[word]! && !option.contains(translation) {
           option.insert(translation)
@@ -38,10 +38,10 @@ final class GameService {
       }
       var optionsTemp = Array(option)
       optionsTemp.shuffle()
-      result.append(Round(word: word, options: optionsTemp))
+      rounds.append(Round(word: word, options: optionsTemp))
     }
 
-    return result
+    return rounds
   }
 }
 

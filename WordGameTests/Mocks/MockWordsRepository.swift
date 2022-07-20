@@ -9,6 +9,6 @@
 
 final class MockWordRepository: WordsProvidable {
   func getWords() -> [Word]? {
-    TestConstant.testWords2
+    TestConstant.testWords
   }
 }

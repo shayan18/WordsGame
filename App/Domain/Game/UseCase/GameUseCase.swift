@@ -8,19 +8,19 @@
 import Foundation
 
 protocol GamePlayable {
-  var updateGameData: ((Round)->())? { get set }
+  var updateRound: ((Round)->())? { get set }
   var endGame: (()->())? { get set }
-  var setupGame: Round { get }
-  func checkAction(action: PlayerAction, result: @escaping (Bool) -> Void)
+  var setupRound: Round { get }
   var score: Int { get }
   var lives: Int { get }
+  func checkAction(action: PlayerAction, result: @escaping (Bool) -> Void)
 }
 
 final class GameUseCase: GamePlayable {
   let wordsRepository: WordsProvidable
-  var updateGameData: ((Round) -> ())?
+  var updateRound: ((Round) -> ())?
   var endGame: (() -> ())?
-  var setupGame: Round { gameService.rounds.first ?? Round(word: "Something went wrong", options: []) }
+  var setupRound: Round { gameService.rounds.first ?? Round(word: "Something went wrong", options: []) }
 
   var score: Int = 0
   var lives: Int = 3
@@ -59,7 +59,7 @@ final class GameUseCase: GamePlayable {
 
   private func updateData() {
     inProcessGameDataIndex += 1
-    updateGameData?(gameService.rounds[inProcessGameDataIndex])
+    updateRound?(gameService.rounds[inProcessGameDataIndex])
   }
 
   private func handleRightAnswerCase(answer: String, result: @escaping (Bool) -> Void) {

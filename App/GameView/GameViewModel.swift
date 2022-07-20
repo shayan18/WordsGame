@@ -65,8 +65,8 @@ final class GameScreenViewModel: GameScreenViewModelProtocol {
   init(useCase: GamePlayable, actions: GameScreenActions) {
     self.useCase = useCase
     self.actions = actions
-    self.gameData = useCase.setupGame
-    self.useCase.updateGameData = { [weak self] (gameData) in self?.updateGameData(gameData: gameData) }
+    self.gameData = useCase.setupRound
+    self.useCase.updateRound = { [weak self] (gameData) in self?.updateGameData(gameData: gameData) }
     self.useCase.endGame = { [weak self] in self?.actions.dismiss() }
   }
 

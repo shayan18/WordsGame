@@ -44,7 +44,7 @@ App is using XCTest for unit tests.
 
 ## Test Coverage: 38.8%
 
-## Decision made because of time restricted:
+## Decision made because of time restrictions
 - Modularization (create separate swift packages for specific features).
 - Better error handling
 - Improve the UI/UX of the game.
